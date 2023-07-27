@@ -9,7 +9,7 @@ area_names <- list("IXa" = 1)
 actions_time <- list(
   g3a_time(
     1979L, 2023L,
-    #final_year_steps = 2L
+    final_year_steps = 2L
     step_lengths = c(3L, 3L, 3L, 3L)),
   NULL)
 
