@@ -54,8 +54,7 @@ actions_seine <- list(
   g3a_predate_fleet(
     seine,
     list(anch),
-    suitabilities = list(
-      anch = g3_suitability_exponentiall50(
+    suitabilities = g3_suitability_exponentiall50(
         g3_formula(
           if (cur_year < 2001) alpha_early else alpha_late,
           alpha_early = g3_parameterized('seine.alpha.1998', by_stock = TRUE),
@@ -63,7 +62,7 @@ actions_seine <- list(
         g3_formula(
           if (cur_year < 2001) l50_early else l50_late,
           l50_early = g3_parameterized('seine.l50.1998', by_stock = TRUE),
-          l50_late = g3_parameterized('seine.l50.2001', by_stock = TRUE)))),
+          l50_late = g3_parameterized('seine.l50.2001', by_stock = TRUE))),
     catchability_f = g3a_predate_catchability_numberfleet(
       g3_timeareadata("seine_data", seine_data, "number", areas = area_names))),
   NULL)
@@ -91,10 +90,9 @@ actions_pelago <- list(
   g3a_predate_fleet(
     pelago,
     list(anch),
-    suitabilities = list(
-      anch = g3_suitability_exponentiall50(
+    suitabilities = g3_suitability_exponentiall50(
         g3_parameterized('pelago.alpha', by_stock = TRUE),
-        g3_parameterized('pelago.l50', by_stock = TRUE))),
+        g3_parameterized('pelago.l50', by_stock = TRUE)),
     catchability_f = g3a_predate_catchability_numberfleet(
       g3_timeareadata("pelago_data", pelago_data, "number", areas = area_names))),
   NULL)
