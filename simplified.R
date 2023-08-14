@@ -21,15 +21,13 @@ anch <- g3_stock("anch", seq(3, 22 - 0.5, 0.5)) |>
   g3s_livesonareas(area_names["IXa"]) |>
   g3s_age(0L, 3L)
 
+M_by_age <- g3_parameterized('M', by_stock = TRUE, by_age = TRUE)
 actions_anch <- list(
   g3a_growmature(anch, g3a_grow_impl_bbinom(
     maxlengthgroupgrowth = 5L)),
-  g3a_naturalmortality(anch,
-    g3a_naturalmortality_exp(by_age = TRUE)),
+  g3a_naturalmortality(anch, g3a_naturalmortality_exp(M_by_age)),
   g3a_initialconditions_normalparam(anch,
-    factor_f = g3a_renewal_initabund(
-      scalar = g3_parameterized("init.scalar", by_stock = TRUE, by_age = TRUE),
-      M = g3_parameterized('M', by_stock = TRUE, by_age = TRUE)),
+    factor_f = g3a_renewal_initabund(M = M_by_age),
     by_age = TRUE),
   g3a_renewal_normalparam(anch,
     factor_f = g3_parameterized('anch.rec', by_year = TRUE, by_step = TRUE, ifmissing = NaN),
@@ -155,10 +153,10 @@ params.in[grepl('^anch\\.init\\.sd\\.\\d+', params.in$switch), 'value'] <- c(0.5
 params.in['init.F', 'value'] <- 0  # NB: No equivalent in gadget2, see g3a_renewal_initabund()
 
 # NB: This is as close as we can get with the default _vonb()
-# all.equal(c(9.76, 13.6, 15.2, 16.1), sapply(0:3, function (a) g3_eval(g3a_renewal_vonb(Linf = 19, K = 0.89, recage = 0, recl = 9.759), age = a)))
-# [1] "Mean relative difference: 0.1117414"
-params.in["anch.recl", 'value'] <- 9.759
-params.in["anch.recl", 'optimise'] <- FALSE
+# > all.equal(c(9.76, 13.6, 15.2, 16.1), sapply(0:3, function (a) g3_eval(g3a_renewal_vonb_t0(Linf = 19, K = 0.89, t0 = -0.4311792), age = a)))
+# [1] "Mean relative difference: 0.1117358"
+params.in["anch.t0", 'value'] <- -0.4311792
+params.in["anch.t0", 'optimise'] <- FALSE
 params.in["recage", 'value'] <- 0
 params.in["recage", 'optimise'] <- FALSE
 
