@@ -71,7 +71,7 @@ actions_likelihood_seine <- list(
     fleets = list(seine),
     stocks = list(anch),
     function_f = g3l_distribution_sumofsquares(),
-    area_group = list(IXa = 1),
+    area_group = area_names,
     report = TRUE,
     nll_breakdown = TRUE),
   NULL)
