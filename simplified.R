@@ -30,9 +30,8 @@ actions_anch <- list(
     factor_f = g3a_renewal_initabund(M = M_by_age),
     by_age = TRUE),
   g3a_renewal_normalparam(anch,
-    factor_f = g3_parameterized('anch.rec', by_year = TRUE, by_step = TRUE, ifmissing = NaN),
-    stddev_f = g3_parameterized('rec.sd', by_stock = TRUE, by_step = TRUE),
-    run_f = ~age == stock__minage && !cur_year_projection),
+    stddev_f = g3_parameterized('rec.sd', value = 10, by_stock = TRUE, by_step = TRUE),
+    run_step = NULL),
   g3a_age(anch),
   NULL)
 
